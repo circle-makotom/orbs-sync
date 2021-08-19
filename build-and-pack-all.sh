@@ -6,7 +6,7 @@ GOOS_LIST=("linux" "windows" "darwin")
 GOARCH_LIST=("amd64" "arm64")
 BUILD_NAME=${BUILD_NAME:-"git"}
 BUILD_ANNOTATION="$(date --iso-8601=seconds)"
-BUILD_NAME_VAR_PACKGE="github.com/circle-makotom/orbs-sync/cmd"
+BUILD_NAME_VAR_PACKAGE="github.com/circle-makotom/orbs-sync/cmd"
 
 if [ "${GOOS_LIST_OVERRIDE:-}" ]
 then
@@ -21,7 +21,7 @@ build_gc() {
     goos=$1
     goarch=$2
 
-    GOOS="${goos}" GOARCH="${goarch}" CGO_ENABLED=0 go build -ldflags "-X ${BUILD_NAME_VAR_PACKGE}.BuildName=${BUILD_NAME} -X ${BUILD_NAME_VAR_PACKGE}.BuildAnnotation=${BUILD_ANNOTATION}" -o "dist/${goos}/${goarch}/orbs-sync" .
+    GOOS="${goos}" GOARCH="${goarch}" CGO_ENABLED=0 go build -ldflags "-X ${BUILD_NAME_VAR_PACKAGE}.BuildName=${BUILD_NAME} -X ${BUILD_NAME_VAR_PACKAGE}.BuildAnnotation=${BUILD_ANNOTATION}" -o "dist/${goos}/${goarch}/orbs-sync" .
 
     if [ "${goos}" == "windows" ]
     then
@@ -51,7 +51,7 @@ build_android() {
 
     CC="$(pwd)/android-ndk-r21e/toolchains/llvm/prebuilt/linux-x86_64/bin/${arch_clang}-linux-android30-clang" \
     CXX="$(pwd)/android-ndk-r21e/toolchains/llvm/prebuilt/linux-x86_64/bin/${arch_clang}-linux-android30-clang++" \
-    GOOS="${goos}" GOARCH="${goarch}" CGO_ENABLED=1 go build -ldflags "-X ${BUILD_NAME_VAR_PACKGE}.BuildName=${BUILD_NAME} -X ${BUILD_NAME_VAR_PACKGE}.BuildAnnotation=${BUILD_ANNOTATION}" -o "dist/${goos}/${goarch}/orbs-sync" .
+    GOOS="${goos}" GOARCH="${goarch}" CGO_ENABLED=1 go build -ldflags "-X ${BUILD_NAME_VAR_PACKAGE}.BuildName=${BUILD_NAME} -X ${BUILD_NAME_VAR_PACKAGE}.BuildAnnotation=${BUILD_ANNOTATION}" -o "dist/${goos}/${goarch}/orbs-sync" .
 }
 
 package() {
