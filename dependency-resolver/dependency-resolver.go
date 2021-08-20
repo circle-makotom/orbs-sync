@@ -51,12 +51,9 @@ func initMaps(orbs []*types.VersionedOrb) []string {
 			illegible = append(illegible, orb.Ref)
 		} else {
 			if importingOrbs != nil {
-				procQueue := []map[string]interface{}{importingOrbs.Orbs}
 
-				for len(procQueue) > 0 {
-					entry := procQueue[0]
-
-					for _, prop := range entry {
+				for procQueue := []map[string]interface{}{importingOrbs.Orbs}; len(procQueue) > 0; procQueue = procQueue[1:] {
+					for _, prop := range procQueue[0] {
 						switch value := prop.(type) {
 						case string:
 							siblingDependents := getDependents(value)
@@ -71,8 +68,6 @@ func initMaps(orbs []*types.VersionedOrb) []string {
 							}
 						}
 					}
-
-					procQueue = procQueue[1:]
 				}
 			}
 
