@@ -51,7 +51,6 @@ func initMaps(orbs []*types.VersionedOrb) []string {
 			illegible = append(illegible, orb.Ref)
 		} else {
 			if importingOrbs != nil {
-
 				for procQueue := []map[string]interface{}{importingOrbs.Orbs}; len(procQueue) > 0; procQueue = procQueue[1:] {
 					for _, prop := range procQueue[0] {
 						switch value := prop.(type) {
