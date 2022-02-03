@@ -205,6 +205,7 @@ func ListAllVersionedOrbsFast(cl *circleql.Client, knownHiddenOrbs []string, inc
 		var result circleapi.OrbListResponse
 
 		request := circleql.NewRequest(query)
+		request.SetToken(cl.Token)
 		request.Var("first", fastStrategyBulkiness)
 		request.Var("after", currentCursor)
 		request.Var("certifiedOnly", !includeUncertified)
