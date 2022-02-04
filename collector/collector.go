@@ -266,19 +266,25 @@ func ListAllVersionedOrbsSlow(cl *circleql.Client, knownHiddenOrbs []string, inc
 				return nil, err
 			}
 
-			for _, orbVersion := range orbVersions {
-				logger.Printf("fetching source of orb %s", orbVersion.Ref)
-				orbSrc, err := circleapi.OrbSource(cl, orbVersion.Ref)
-				if err != nil {
-					return nil, errors.Wrapf(err, "could not fetch source of orb %q", orbVersion.Ref)
-				}
+			// Make sure that source fetch happens only if includeSource is truthy for sure.
+			// It is possible that the first attempt of FetchVersionsForOne got a temporary error even with includeSource falsy.
+			if includeSource {
+				for _, orbVersion := range orbVersions {
+					logger.Printf("fetching source of orb %s", orbVersion.Ref)
+					orbSrc, err := circleapi.OrbSource(cl, orbVersion.Ref)
+					if err != nil {
+						return nil, errors.Wrapf(err, "could not fetch source of orb %q", orbVersion.Ref)
+					}
 
-				ret = append(ret, &types.VersionedOrb{
-					Ref:     orbVersion.Ref,
-					Name:    orbVersion.Name,
-					Version: orbVersion.Version,
-					Source:  orbSrc,
-				})
+					ret = append(ret, &types.VersionedOrb{
+						Ref:     orbVersion.Ref,
+						Name:    orbVersion.Name,
+						Version: orbVersion.Version,
+						Source:  orbSrc,
+					})
+				}
+			} else {
+				ret = append(ret, orbVersions...)
 			}
 		} else {
 			ret = append(ret, versionedOrbs...)
