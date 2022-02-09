@@ -214,7 +214,7 @@ workflows:
             - smoke-test-windows-amd64
             - smoke-test-darwin-amd64
           context:
-            - github-release
+            - github
           filters:
             branches:
               only: main
