@@ -141,7 +141,7 @@ func listKnownHiddenOrbs(cl *circleql.Client, targetOrbNames []string, includeSo
 
 		versionedOrbs, err = FetchVersionsForOne(cl, orbName, includeSource)
 
-		if err != nil && errors.As(err, &circleapi.ErrOrbVersionNotExists{}) {
+		if err != nil {
 			return nil, errors.Wrapf(err, "could not list orbs %q", orbName)
 		}
 
