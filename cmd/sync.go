@@ -39,7 +39,7 @@ func cmdSync() *cobra.Command {
 	flags.StringVar(&opts.SrcToken, "src-token", "", "Token for the CircleCI instance from where orbs are coming")
 	flags.StringVar(&opts.DstHostname, "dst-host", "", "Hostname of the CircleCI instance to where orbs are going")
 	flags.StringVar(&opts.DstToken, "dst-token", "", "Token for the CircleCI instance to where orbs are going")
-	flags.BoolVar(&opts.BeSlow, "slow", false, "Use slower strategy to avoid errors on big orbs")
+	flags.BoolVar(&opts.BeSlow, "slow", false, "This does nothing (being left for backward compatibility)")
 	flags.BoolVar(&opts.IncludeUncertified, "include-uncertified", false, "Fetch uncertified orbs as well")
 	flags.StringSliceVar(&opts.KnownHiddenOrbs, "must-include", knownHiddenOrbs, "Orbs to be included regardlessly - used for well-known hidden orbs")
 

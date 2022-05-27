@@ -56,7 +56,7 @@ See `./orbs-sync help` for details to run these commands separately.
 
     - Due to this nature the dependency resolver would say that some orbs have unresolvable dependencies if those orbs are depending on hidden/private orbs.
     - You should be able to tune this nature by passing customized `--must-include` arguments.
-      - Note that the argument can be specified multiple times to specify multiple orbs.
+      - Tips: The argument can be specified multiple times to specify multiple orbs.
 
   - Due to technical limitations, it is not easy to collect _some_/selected versions of orbs.
 
@@ -65,7 +65,3 @@ See `./orbs-sync help` for details to run these commands separately.
   - For this reason this programme can emit thousands of API requests in a short period, causing heavy loads for CircleCI. Do not abuse this, otherwise you can be banned!
 
 - The programme can consume around 1 GiB of memory. This consumption happens as fetched orbs are loaded onto RAM.
-
-- `--slow` option is recommended to run `collect`/`sync` with `--include-uncertified` enabled. Some third-party orbs are very big with lots of updates, and the fast strategy can hit API limitations in response sizes quite easily.
-
-  - Note that `sync --include-uncertified --slow` may take as much as 3 hours to complete.
