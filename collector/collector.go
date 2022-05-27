@@ -297,9 +297,5 @@ func ListAllVersionedOrbsSlow(cl *circleql.Client, knownHiddenOrbs []string, inc
 func ListAllVersionedOrbsWithNewClient(hostname, apiEndpoint, token string, knownHiddenOrbs []string, includeSource, includeUncertified, beSlow, debug bool) ([]*types.VersionedOrb, error) {
 	cl := circleql.NewClient(&http.Client{}, hostname, apiEndpoint, token, debug)
 
-	if beSlow {
-		return ListAllVersionedOrbsSlow(cl, knownHiddenOrbs, includeSource, includeUncertified)
-	} else {
-		return ListAllVersionedOrbsFast(cl, knownHiddenOrbs, includeSource, includeUncertified)
-	}
+	return ListAllVersionedOrbsSlow(cl, knownHiddenOrbs, includeSource, includeUncertified)
 }

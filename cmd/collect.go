@@ -41,7 +41,7 @@ func cmdCollect() *cobra.Command {
 	flags.StringVar(&opts.ListPath, "list", "orbs.txt", "Path to the file to put the list of orbs")
 	flags.StringVar(&opts.SrcDirPath, "src", "orbs", "Path to the directory to put fetched orb sources")
 	flags.BoolVar(&opts.ListOnly, "list-only", false, "Do not fetch orb sources; just list names and versions")
-	flags.BoolVar(&opts.BeSlow, "slow", false, "Use slower strategy to avoid errors on big orbs")
+	flags.BoolVar(&opts.BeSlow, "slow", false, "This does nothing (being left for backward compatibility)")
 	flags.BoolVar(&opts.IncludeUncertified, "include-uncertified", false, "Fetch uncertified orbs as well")
 	flags.StringSliceVar(&opts.KnownHiddenOrbs, "must-include", knownHiddenOrbs, "Orbs to be included regardlessly - used for well-known hidden orbs")
 
